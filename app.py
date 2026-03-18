@@ -1,19 +1,9 @@
-import os 
-from dotenv import load_dotenv
-from openai import OpenAI
+from test_generator import generate_test_cases
 
-
-
-load_dotenv() 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
-response = client.chat.completions.create(
-    model="gpt-4o",
-    messages=[
-        {"role": "user", 
-         "content": "Generate 5 simple test cases for an e-commerce website's shopping cart functionality."
-         }
-    ]
-)
-
-print(response.choices[0].message.content)
+if __name__ == "__main__":
+    user_story = input("Enter user story: ")
+    
+    result = generate_test_cases(user_story)
+    
+    print("\nGenerated Output:\n")
+    print(result)
